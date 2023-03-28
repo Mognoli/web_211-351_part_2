@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="d-flex flex-column justify-content-center w-85 p-3">
+        <h2 class="title">{{ post.title }}</h2>
+        <p>
+            {{ post.author }}, {{ post.date.strftime('%d.%m.%Y') }}
+        
+        </p>
+        <img class="img-top" src="{{ url_for('static', filename='images/' + post.image_id) }}" alt="Sample Image">
+        <div class="body">
+            
+            <p class="text-md-center">
+                {{ post.text }}
+            </p>
+        </div>
+
+        <div class="d-flex flex-column">
+            {% for comment in post.comments %}
+                
+                    
+                
+                    <div class="flex-shrink-0">
+                        <img src="images/avatar.svg" class="rounded-circle" alt="Sample Image">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h5> {{ comment.author }} </h5>
+                        <p> {{comment.text }} </p>
+                    </div>
+                    {% if comment.position == 0 %}
+                        <div class="d-flex mt-4">
+                            <div class="flex-shrink-0">
+                                <img src="images/avatar.svg" class="rounded-circle" alt="Sample Image">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5> {{ comment.author }} </h5>
+                                <p> {{comment.text }} </p>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                        
+                
+                
+            {% endfor %}
+        </div>
+
+       
+    </div>
+{%endblock%}

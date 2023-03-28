@@ -25,7 +25,7 @@
 """
 
 def get_int_vlan_map(config_filename):
-    file = open(config_filename)
+    file = open(config_filename).read()
     k=''
     v='' 
     mode=''
