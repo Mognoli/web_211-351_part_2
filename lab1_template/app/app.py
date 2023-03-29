@@ -21,7 +21,7 @@ def generate_comments(replies=True):
     for i in range(random.randint(1, 5)):
         comment = { 'author': fake.name(), 
                     'text': fake.text(), 
-                    'img_num': random.randint(1, 5),
+                    'img_num': str(random.randint(1, 4))+'.png',
                     'position':  random.randint(0, 2)
         }
         if replies:

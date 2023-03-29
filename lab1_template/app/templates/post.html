@@ -15,22 +15,37 @@
             </p>
         </div>
 
+        <div class="d-flex mt-4"></div>
+        <div class="col-md-12">
+            <div class="panel">
+             <div class="panel-body">
+             <textarea class="form-control" rows="2" placeholder="Добавьте Ваш комментарий"></textarea>
+             <div class="mar-top clearfix">
+             <button class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i> Отправить </button>
+             <a class="btn btn-trans btn-icon fa fa-video-camera add-tooltip" href="#"></a>
+             <a class="btn btn-trans btn-icon fa fa-camera add-tooltip" href="#"></a>
+             <a class="btn btn-trans btn-icon fa fa-file add-tooltip" href="#"></a>
+             </div>
+             </div>
+            </div>
+            <div class="d-flex mt-4"></div>
+
         <div class="d-flex flex-column">
             {% for comment in post.comments %}
                 
                     
-                
+            {% if comment.position == 0  or {{ loop.index }} == 0 %}
                     <div class="flex-shrink-0">
-                        <img src="images/avatar.svg" class="rounded-circle" alt="Sample Image">
+                        <img class="img-top icon" src="{{ url_for('static', filename='images/icon-' + comment.img_num) }}" alt="Sample Image">
                     </div>
                     <div class="flex-grow-1 ms-3">
                         <h5> {{ comment.author }} </h5>
                         <p> {{comment.text }} </p>
                     </div>
-                    {% if comment.position == 0 %}
+                    {% else %}
                         <div class="d-flex mt-4">
                             <div class="flex-shrink-0">
-                                <img src="images/avatar.svg" class="rounded-circle" alt="Sample Image">
+                                <img class="img-top icon" src="{{ url_for('static', filename='images/icon-' + comment.img_num) }}" alt="Sample Image">
                             </div>
                             <div class="flex-grow-1 ms-3">
                                 <h5> {{ comment.author }} </h5>
