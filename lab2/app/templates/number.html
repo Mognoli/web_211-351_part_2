@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST">
+    <div class="input-group has-validation">
+        <input 
+            class="form-control {% if errormsg %}is-invalid{% endif %} {% if not errormsg and request.method == 'POST' %}is-valid{% endif %}"
+            name="operand1" type="text" value="{{request.form.get('operand1')}}">
+            {% if errormsg %}
+            <div class="invalid-feedback" >{{errormsg}}</div>
+        {% elif  true_numbermsg %}
+            <div class="valid-feedback">{{true_numbermsg}}</div>
+        {% endif %}
+    </div>
+    <button name="submit">Проверить</button>
+</form>
+    
+{% endblock %}
+
