@@ -5,6 +5,7 @@ from faker import Faker
 fake = Faker()
 
 app = Flask(__name__)
+app.config['DEBUG'] = True
 application = app
 
 if __name__ == "__main__":
