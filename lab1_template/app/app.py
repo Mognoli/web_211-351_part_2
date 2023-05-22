@@ -5,17 +5,18 @@ from faker import Faker
 fake = Faker()
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
 application = app
 
-if __name__ == "__main__":
-    app.run(debug=True)
 
 images_ids = ['7d4e9175-95ea-4c5f-8be5-92a6b708bb3c',
               '2d2ab7df-cdbc-48a8-a936-35bba702def5',
               '6e12f3de-d5fd-4ebb-855b-8cbc485278b7',
               'afc2cfe7-5cac-4b80-9b9a-d5c65ef0c728',
               'cab5b7f2-774e-4884-a200-0c0180fa777f']
+
+comment_icon = ['1'
+
+]
 
 def generate_comments(replies=True):
     comments = []

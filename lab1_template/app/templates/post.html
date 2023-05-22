@@ -1,65 +1,54 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="d-flex flex-column justify-content-center w-85 p-3">
-        <h2 class="title">{{ post.title }}</h2>
-        <p>
-            {{ post.author }}, {{ post.date.strftime('%d.%m.%Y') }}
-        
-        </p>
-        <img class="img-top" src="{{ url_for('static', filename='images/' + post.image_id) }}" alt="Sample Image">
-        <div class="body">
-            
-            <p class="text-md-center">
-                {{ post.text }}
-            </p>
+<h1>{{ title }}</h1>
+<h4>{{ post.author }}, {{ post.date.strftime('%d.%m.%Y') }}</h4>
+<div class="d-flex justify-content-center">
+    <img class="card-img-top w-75" src="{{ url_for('static', filename='images/' + post.image_id) }}"
+        alt="Card image cap">
+</div>
+<div class="post__content">
+    {{ post.text }}
+</div>
+<div class="post__comment-input container border rounded-2 my-4">
+    <div class="row justify-content-start mb-4 bg-light">
+        <div class="col-12 border-bottom py-2 ps-3">
+            Оставьте комментарий
         </div>
-
-        <div class="d-flex mt-4"></div>
-        <div class="col-md-12">
-            <div class="panel">
-             <div class="panel-body">
-             <textarea class="form-control" rows="2" placeholder="Добавьте Ваш комментарий"></textarea>
-             <div class="mar-top clearfix">
-             <button class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i> Отправить </button>
-             <a class="btn btn-trans btn-icon fa fa-video-camera add-tooltip" href="#"></a>
-             <a class="btn btn-trans btn-icon fa fa-camera add-tooltip" href="#"></a>
-             <a class="btn btn-trans btn-icon fa fa-file add-tooltip" href="#"></a>
-             </div>
-             </div>
-            </div>
-            <div class="d-flex mt-4"></div>
-
-        <div class="d-flex flex-column">
-            {% for comment in post.comments %}
-                
-                    
-            {% if comment.position == 0  or {{ loop.index }} == 0 %}
-                    <div class="flex-shrink-0">
-                        <img class="img-top icon" src="{{ url_for('static', filename='images/icon-' + comment.img_num) }}" alt="Sample Image">
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                        <h5> {{ comment.author }} </h5>
-                        <p> {{comment.text }} </p>
-                    </div>
-                    {% else %}
-                        <div class="d-flex mt-4">
-                            <div class="flex-shrink-0">
-                                <img class="img-top icon" src="{{ url_for('static', filename='images/icon-' + comment.img_num) }}" alt="Sample Image">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <h5> {{ comment.author }} </h5>
-                                <p> {{comment.text }} </p>
-                            </div>
-                        </div>
-                        {% endif %}
-                    </div>
-                        
-                
-                
-            {% endfor %}
-        </div>
-
-       
     </div>
-{%endblock%}
+    <div class="row px-2 pb-3">
+        <div class="input-group col-12 mb-3">
+            <textarea class="form-control" style="height: 100px"></textarea>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary">Отправить</button>
+        </div>
+    </div>
+</div>
+<div class="d-flex flex-column">
+    {% for comment in post.comments %}
+        <div class="d-flex">
+            <div class="flex-shrink-0">
+                <img src="{{ url_for('static', filename='images/icon-1.png') }}" class="rounded-circle icon"
+                    alt="Sample Image">
+            </div>
+            <div class="flex-grow-1 ms-3">
+                <h5>{{ comment.author }}</h5>
+                <p>{{ comment.text }}</p>
+
+                {% for reply in comment.replies %}
+                    <div class="d-flex mt-4">
+                        <div class="flex-shrink-0">
+                            <img src="{{ url_for('static', filename='images/icon-2.png') }}" class="rounded-circle icon" alt="Sample Image">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5>{{ reply.author }}</h5>
+                            <p>{{ reply.text }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
